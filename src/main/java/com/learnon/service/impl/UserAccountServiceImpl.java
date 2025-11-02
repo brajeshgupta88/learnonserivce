@@ -69,7 +69,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     // helpers
     private UserAccountDTO toDto(UserAccount u) {
         UserAccountDTO dto = new UserAccountDTO();
-        dto.setId(u.getId());
+        dto.setId(u.getId().toString());
         dto.setEmail(u.getEmail());
      //   dto.setFirstName(u.getFirstName());
      //   dto.setLastName(u.getLastName());
@@ -89,7 +89,7 @@ public class UserAccountServiceImpl implements UserAccountService {
       //  u.setLastName(dto.getFirstName());
       //  u.setLastName(dto.getLastName());
         u.setPasswordHash(dto.getPassword());
-      //  u.setCreatedAt(dto.getCreatedAt());
+        u.setRole("Customer");
         return u;
     }
 }

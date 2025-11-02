@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import java.util.UUID;
 import com.learnon.model.entity.enums.Role;
 import com.learnon.model.entity.enums.UserStatus;
 
 @Entity
-@Table(name = "useraccount", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "useraccount", schema = "learnondb", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,13 +30,11 @@ public class UserAccount extends BaseAuditEntity {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "role", length = 50)
-    private Role role;
+    private String role;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 50)
-    private UserStatus status;
+    private String status;
 
    
 
