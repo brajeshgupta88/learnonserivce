@@ -46,9 +46,9 @@ public class UserAccountServiceImpl implements UserAccountService {
   
         return repo.findById(uuid).map(existing -> {
             if (dto.getEmail() != null) existing.setEmail(dto.getEmail());
-            if (dto.getFirstName() != null) existing.setFirstName(dto.getFirstName());
-            if (dto.getLastName() != null) existing.setLastName(dto.getLastName());
-            if (dto.getPassword() != null && !dto.getPassword().isBlank()) existing.setPassword(dto.getPassword());
+         //   if (dto.getFirstName() != null) existing.setLastName(dto.getFirstName());
+         //   if (dto.getLastName() != null) existing.setLastName(dto.getLastName());
+            if (dto.getPassword() != null && !dto.getPassword().isBlank()) existing.setPasswordHash(dto.getPassword());
             UserAccount saved = repo.save(existing);
             return toDto(saved);
         });
@@ -71,21 +71,25 @@ public class UserAccountServiceImpl implements UserAccountService {
         UserAccountDTO dto = new UserAccountDTO();
         dto.setId(u.getId());
         dto.setEmail(u.getEmail());
-        dto.setFirstName(u.getFirstName());
-        dto.setLastName(u.getLastName());
-        dto.setPassword(u.getPassword()); // avoid exposing password in real APIs
-        dto.setCreatedAt(u.getCreatedAt());
+     //   dto.setFirstName(u.getFirstName());
+     //   dto.setLastName(u.getLastName());
+        dto.setPassword(u.getPasswordHash()); // avoid exposing password in real APIs
+     //   dto.setCreatedAt(u.getCreatedAt());
         return dto;
     }
 
     private UserAccount toEntity(UserAccountDTO dto) {
         UserAccount u = new UserAccount();
-        u.setId(dto.getId());
+
+       // UUID uuid = UUID.fromString(dto.getId());
+
+        UUID uuid = UUID.randomUUID();
+        u.setId(uuid);
         u.setEmail(dto.getEmail());
-        u.setFirstName(dto.getFirstName());
-        u.setLastName(dto.getLastName());
-        u.setPassword(dto.getPassword());
-        u.setCreatedAt(dto.getCreatedAt());
+      //  u.setLastName(dto.getFirstName());
+      //  u.setLastName(dto.getLastName());
+        u.setPasswordHash(dto.getPassword());
+      //  u.setCreatedAt(dto.getCreatedAt());
         return u;
     }
 }

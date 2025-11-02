@@ -6,17 +6,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.hibernate.annotations.GenericGenerator;
-
 import java.util.UUID;
-
 import com.learnon.model.entity.enums.Role;
 import com.learnon.model.entity.enums.UserStatus;
 
 @Entity
-@Table(name = "user_account", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Data
+@Table(name = "useraccount", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,8 +20,8 @@ import com.learnon.model.entity.enums.UserStatus;
 public class UserAccount extends BaseAuditEntity {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  //  @GeneratedValue(generator = "UUID")
+  //  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     private UUID id;
 
@@ -42,4 +38,7 @@ public class UserAccount extends BaseAuditEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 50)
     private UserStatus status;
+
+   
+
 }
